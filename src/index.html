@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'" />
+<title>Pulse</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="titlebar">
+    <div class="titlebar-drag">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 40 20" width="22" height="12">
+          <polyline points="0,10 8,10 11,2 15,18 19,6 22,14 25,10 40,10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>PULSE</span>
+      </div>
+    </div>
+    <div class="titlebar-controls">
+      <button id="btn-min" class="tb-btn" title="Minimize">&#xE921;</button>
+      <button id="btn-max" class="tb-btn" title="Maximize">&#xE922;</button>
+      <button id="btn-close" class="tb-btn tb-close" title="Close">&#xE8BB;</button>
+    </div>
+  </div>
+
+  <div class="app">
+    <nav class="sidebar">
+      <div class="nav-group">
+        <button class="nav-item active" data-view="summary">
+          <span class="nav-icon">&#9635;</span><span>Summary</span>
+        </button>
+        <button class="nav-item" data-view="performance">
+          <span class="nav-icon">&#9673;</span><span>Performance</span>
+        </button>
+        <button class="nav-item" data-view="processes">
+          <span class="nav-icon">&#9776;</span><span>Processes</span>
+        </button>
+        <button class="nav-item" data-view="power">
+          <span class="nav-icon">&#9889;</span><span>Power &amp; Battery</span>
+        </button>
+        <button class="nav-item" data-view="about">
+          <span class="nav-icon">&#128187;</span><span>About This PC</span>
+        </button>
+      </div>
+      <div class="sidebar-footer">
+        <div class="sys-line" id="sys-hostname">&mdash;</div>
+        <div class="sys-line dim" id="sys-os">&mdash;</div>
+      </div>
+    </nav>
+
+    <main class="content">
+
+      <!-- SUMMARY VIEW -->
+      <section class="view active" id="view-summary">
+        <div class="card-grid" id="summary-cards"></div>
+      </section>
+
+      <!-- PERFORMANCE VIEW -->
+      <section class="view" id="view-performance">
+        <div class="perf-layout">
+          <div class="perf-list" id="perf-list"></div>
+          <div class="perf-main">
+            <div class="perf-header">
+              <h2 id="perf-title">CPU</h2>
+              <div class="perf-headline" id="perf-headline">&mdash;</div>
+            </div>
+            <div class="perf-chart-wrap">
+              <canvas id="perf-chart"></canvas>
+            </div>
+            <div class="perf-stats" id="perf-stats"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROCESSES VIEW -->
+      <section class="view" id="view-processes">
+        <div class="proc-toolbar">
+          <input type="text" id="proc-search" placeholder="Search processes..." />
+          <div class="proc-summary" id="proc-summary">&mdash;</div>
+        </div>
+        <div class="proc-table-wrap">
+          <table class="proc-table">
+            <thead>
+              <tr>
+                <th data-sort="name">Name</th>
+                <th data-sort="pid">PID</th>
+                <th data-sort="cpu" class="sort-active">CPU %</th>
+                <th data-sort="mem">Memory</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="proc-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- POWER VIEW -->
+      <section class="view" id="view-power">
+        <div class="power-layout">
+          <div class="battery-visual-card">
+            <div class="battery-shell">
+              <div class="battery-fill" id="battery-fill"></div>
+              <div class="battery-nub"></div>
+            </div>
+            <div class="battery-pct" id="battery-pct">&mdash;</div>
+            <div class="battery-status" id="battery-status">&mdash;</div>
+          </div>
+          <div class="power-right">
+            <div class="power-chart-card">
+              <div class="perf-header">
+                <h2>Power Draw</h2>
+                <div class="perf-headline" id="power-headline">&mdash;</div>
+              </div>
+              <div class="perf-chart-wrap">
+                <canvas id="power-chart"></canvas>
+              </div>
+            </div>
+            <div class="stat-tile-row" id="power-stats"></div>
+            <div class="health-card">
+              <div class="health-row">
+                <span>Battery Health</span>
+                <span id="health-pct">&mdash;</span>
+              </div>
+              <div class="health-bar"><div class="health-bar-fill" id="health-bar-fill"></div></div>
+              <div class="health-caps" id="health-caps">&mdash;</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT THIS PC VIEW -->
+      <section class="view" id="view-about">
+        <div class="about-header" id="about-header">
+          <div class="about-header-icon">&#128421;</div>
+          <div>
+            <div class="about-title" id="about-title">&mdash;</div>
+            <div class="about-subtitle" id="about-subtitle">&mdash;</div>
+          </div>
+        </div>
+        <div class="spec-groups" id="spec-groups"></div>
+      </section>
+
+    </main>
+  </div>
+
+<script src="renderer.js"></script>
+</body>
+</html>

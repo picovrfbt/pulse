@@ -1,0 +1,16 @@
+{
+  "name": "pulse",
+  "version": "1.0.0",
+  "description": "A live system monitor inspired by TMOG",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "systeminformation": "^5.23.5"
+  },
+  "devDependencies": {
+    "electron": "^32.0.0"
+  }
+}
